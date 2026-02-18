@@ -1,0 +1,10 @@
+{
+	"response": {
+		"errors": [
+			{
+				"code": "190001",
+				"message": "Unexpected system error. Please try again later."
+			}
+		]
+	}
+}

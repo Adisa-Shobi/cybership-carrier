@@ -1,0 +1,10 @@
+{
+	"token_type": "Bearer",
+	"issued_at": "1718000000000",
+	"client_id": "test-client-id",
+	"access_token": "FG5vnyMSPtRRHkuB9Xfe4bclM7qN",
+	"scope": "public",
+	"expires_in": "14400",
+	"refresh_count": "0",
+	"status": "approved"
+}
