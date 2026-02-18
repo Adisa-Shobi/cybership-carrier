@@ -24,7 +24,6 @@ export const RateRequestSchema = z.object({
 	origin: AddressSchema,
 	destination: AddressSchema,
 	packages: z.array(PackageSchema).min(1),
-	serviceCode: z.string().optional(),
 });
 
 export type RateRequest = z.infer<typeof RateRequestSchema>;
