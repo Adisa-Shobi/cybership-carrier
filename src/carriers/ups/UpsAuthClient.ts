@@ -36,20 +36,14 @@ export class UpsAuthClient implements ICarrierAuth {
 		this.config = config;
 	}
 
-	/**
-	 * Returns a valid access token, serving from cache when possible.
-	 * Transparently fetches a new token when the cache is empty or expired.
-	 */
 	async accessToken(): Promise<string> {
 		if (this.cachedToken !== null && Date.now() < this.expiresAt) {
-			console.info("[UpsAuth] serving token from cache");
 			return this.cachedToken;
 		}
 		return this.authenticate();
 	}
 
 	clearToken(): void {
-		console.info("[UpsAuth] token cleared");
 		this.cachedToken = null;
 		this.expiresAt = 0;
 	}
@@ -59,7 +53,6 @@ export class UpsAuthClient implements ICarrierAuth {
 			`${this.config.clientId}:${this.config.clientSecret}`,
 		).toString("base64");
 
-		console.info("[UpsAuth] requesting new token");
 		try {
 			const response = await axios.post(
 				`${this.config.baseUrl}/security/v1/oauth/token`,
@@ -76,13 +69,8 @@ export class UpsAuthClient implements ICarrierAuth {
 			this.cachedToken = parsed.access_token;
 			this.expiresAt =
 				Date.now() + (parsed.expires_in - EXPIRY_BUFFER_S) * 1000;
-			console.info(
-				"[UpsAuth] token acquired, expires in %ds",
-				parsed.expires_in,
-			);
 			return parsed.access_token;
 		} catch (error) {
-			console.error("[UpsAuth] token request failed", error);
 			throw this.toStructuredError(error);
 		}
 	}

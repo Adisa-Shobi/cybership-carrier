@@ -1,0 +1,3 @@
+export UPS_CLIENT_ID=""
+export UPS_CLIENT_SECRET=""
+export UPS_BASE_URL="https://onlinetools.ups.com"
